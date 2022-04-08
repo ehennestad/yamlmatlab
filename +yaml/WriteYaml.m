@@ -10,7 +10,7 @@ if ~exist('flowstyle','var')
     [pth,~,~] = fileparts(mfilename('fullpath'));
     try
         import('org.yaml.snakeyaml.*');
-        javaObject('Yaml');
+        javaObject('org.yaml.snakeyaml.Yaml');
     catch
         dp = [pth filesep 'external' filesep 'snakeyaml-1.9.jar'];
         if not(ismember(dp, javaclasspath ('-dynamic')))
