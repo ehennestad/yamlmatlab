@@ -37,6 +37,13 @@ try
     fprintf('.');
     stat.test_RY_usecase_01 = test_RY_usecase_01();
     fprintf('.\n');
+
+    C = struct2cell(stat);
+    T = [C{3:end}];
+    numOk = sum([T.ok]);
+    numTotal = numel(T);
+    stat.numOk = numOk;
+    stat.numTotal = numTotal;
     
 catch
     stat.ok = 0;
@@ -44,160 +51,163 @@ catch
 end
 end
 
-function result = PTH_PRIMITIVES()
-    result = sprintf('Data%stest_primitives%s',filesep,filesep);
+function result = PTH_PRIMITIVES(fileName)
+    testDir = fileparts(mfilename('fullpath'));
+    result = fullfile(testDir, 'Data', 'test_primitives', fileName);
 end
 
-function result = PTH_IMPORT()
-    result = sprintf('Data%stest_import%s',filesep,filesep);
+function result = PTH_IMPORT(fileName)
+    testDir = fileparts(mfilename('fullpath'));
+    result = fullfile(testDir, 'Data', 'test_import', fileName);
 end
 
-function result = PTH_INHERITANCE()
-    result = sprintf('Data%stest_inheritance%s',filesep,filesep);
+function result = PTH_INHERITANCE(fileName)
+    testDir = fileparts(mfilename('fullpath'));
+    result = fullfile(testDir, 'Data', 'test_inheritance', fileName);
 end
 
 function stat = test_RY_Matrices()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'matrices.yaml']);
-        tv = load([PTH_PRIMITIVES() 'matrices.mat']);
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('matrices.yaml') );
+        tv = load( PTH_PRIMITIVES('matrices.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_FloatingPoints()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'floating_points.yaml']);
-        tv = load([PTH_PRIMITIVES() 'floating_points.mat']);
-        if ~isequalwithequalnans(ry, tv.testval)
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('floating_points.yaml') );
+        tv = load( PTH_PRIMITIVES('floating_points.mat') );
+        if ~isequaln(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_Indentation()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'indentation.yaml']);
-        tv = load([PTH_PRIMITIVES() 'indentation.mat']);
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('indentation.yaml') );
+        tv = load( PTH_PRIMITIVES('indentation.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_SequenceMapping()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'sequence_mapping.yaml']);
-        tv = load([PTH_PRIMITIVES() 'sequence_mapping.mat']);
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('sequence_mapping.yaml') );
+        tv = load( PTH_PRIMITIVES('sequence_mapping.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_Simple()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'simple.yaml']);
-        tv = load([PTH_PRIMITIVES() 'simple.mat']);
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('simple.yaml') );
+        tv = load( PTH_PRIMITIVES('simple.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_Time()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'time.yaml']);
-        tv = load([PTH_PRIMITIVES() 'time.mat']);
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('time.yaml') );
+        tv = load( PTH_PRIMITIVES('time.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_TimeVariants()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'time_variants.yaml']);
-        tv = load([PTH_PRIMITIVES() 'time_variants.mat']);
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('time_variants.yaml') );
+        tv = load( PTH_PRIMITIVES('time_variants.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_Import()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_IMPORT() 'import.yaml']);
-        tv = load([PTH_IMPORT() 'import.mat']);
+        ry = yaml.ReadYaml( PTH_IMPORT('import.yaml') );
+        tv = load( PTH_IMPORT('import.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_ImportDef()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_IMPORT() 'import_def.yaml']);
-        tv = load([PTH_IMPORT() 'import_def.mat']);
+        ry = yaml.ReadYaml( PTH_IMPORT('import_def.yaml') );
+        tv = load( PTH_IMPORT('import_def.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_ImportNonex()
@@ -205,52 +215,52 @@ function stat = test_RY_ImportNonex()
     stat.desc = 'Did not end with any exception.';
     try
         try
-            ry = ReadYaml([PTH_IMPORT() 'import_nonex.yaml'],1);
+            ry = yaml.ReadYaml( PTH_IMPORT('import_nonex.yaml'), 1);
         catch ex
             if strcmp(ex.identifier, 'MATLAB:MATYAML:FileNotFound')
                 stat.desc = '';
                 stat.ok = 1;
             else
                 rethrow(ex);
-            end;
-        end;
+            end
+        end
         
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_Inheritance()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_INHERITANCE() 'inheritance.yaml']);
-        tv = load([PTH_INHERITANCE() 'inheritance.mat']);
+        ry = yaml.ReadYaml( PTH_INHERITANCE('inheritance.yaml') );
+        tv = load( PTH_INHERITANCE('inheritance.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_InheritanceMultiple()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_INHERITANCE() 'inheritance_multiple.yaml']);
-        tv = load([PTH_INHERITANCE() 'inheritance_multiple.mat']);
+        ry = yaml.ReadYaml( PTH_INHERITANCE('inheritance_multiple.yaml') );
+        tv = load( PTH_INHERITANCE('inheritance_multiple.mat') );
         if ~isequal(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_InheritanceLoop()
@@ -258,90 +268,88 @@ function stat = test_RY_InheritanceLoop()
     stat.desc = 'Did not end with any exception.';
     try
         try
-            ry = ReadYaml([PTH_INHERITANCE() 'inheritance_loop.yaml']);
+            ry = yaml.ReadYaml( PTH_INHERITANCE('inheritance_loop.yaml') );
         catch ex
             if strcmp(ex.identifier, 'MATLAB:MATYAML:inheritedtwice')
                 stat.desc = '';
                 stat.ok = 1;
             else
                 rethrow(ex);
-            end;
-        end;
+            end
+        end
         
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_Whitespaces()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'whitespaces.yaml']);
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('whitespaces.yaml') );
         if ~isfield(ry,'ImageFile') || ~isfield(ry,'ContoursCount')
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_RY_usecase_01()
     stat.ok = 1;
     stat.desc = '';
     try
-        ry = ReadYaml([PTH_PRIMITIVES() 'usecase_struct_01.yaml']);
-        tv = load([PTH_PRIMITIVES() 'usecase_struct_01.mat']);
-        if ~isequalwithequalnans(ry, tv.testval)
+        ry = yaml.ReadYaml( PTH_PRIMITIVES('usecase_struct_01.yaml') );
+        tv = load( PTH_PRIMITIVES('usecase_struct_01.mat') );
+        if ~isequaln(ry, tv.testval)
             stat.desc  = 'Wrong values loaded';
             stat.ok = 0;
-        end;
+        end
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;
+    end
 end
 
 function stat = test_ReadYaml_SimpleStructure()
-
-stat.ok = 1;
-stat.desc = '';
-try
-    s = ReadYaml('simple.yaml');
-    
-    ages = [s.age];
-    
-    if not(isequal([33 27], ages))  || not(all(ismember({'John Smith', 'Mary Smith'}, {s.name}) ))
-        stat.desc  = ' Wrong values loaded';
-        stat.ok = 0;
+    stat.ok = 1;
+    stat.desc = '';
+    try
+        s = yaml.ReadYaml(PTH_PRIMITIVES('simple.yaml'));
+        
+        ages = [s.age];
+        
+        if not(isequal([33 27], ages))  || not(all(ismember({'John Smith', 'Mary Smith'}, {s.name}) ))
+            stat.desc  = ' Wrong values loaded';
+            stat.ok = 0;
+        end
+        
+    catch
+           stat.desc  = 'Program crash';
+           stat.ok = 0;
     end
-    
-catch
-       stat.desc  = 'Program crash';
-       stat.ok = 0;
-end
 end
 
 function stat = test_ReadYaml_DateTime()
-
-stat.ok = 1;
-stat.desc = '';
-try
-    s = ReadYaml('time.yaml');
-    
-    if ~isa(s.Data.B1_S_SW{1},'DateTime')
-        stat.desc  = ' Wrong data type of datetick';
-        stat.ok = 0;
+    stat.ok = 1;
+    stat.desc = '';
+    try
+        s = yaml.ReadYaml(PTH_PRIMITIVES('time.yaml'));
+        
+        if ~isa(s.Data.B1_S_SW{1},'DateTime')
+            stat.desc  = ' Wrong data type of datetick';
+            stat.ok = 0;
+        end
+        if isa(s.Data.B1_S_SW{2},'DateTime')
+            stat.desc  = ' Wrong data type of datetick';
+            stat.ok = 0;
+        end
+    catch
+           stat.desc  = 'Program crash';
+           stat.ok = 0;
     end
-    if isa(s.Data.B1_S_SW{2},'DateTime')
-        stat.desc  = ' Wrong data type of datetick';
-        stat.ok = 0;
-    end
-catch
-       stat.desc  = 'Program crash';
-       stat.ok = 0;
-end
 end
