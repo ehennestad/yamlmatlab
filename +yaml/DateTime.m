@@ -78,7 +78,7 @@ classdef DateTime
         end
         
         function out = colon(this,step,to)
-            vect = [double(this):double(step):double(to)]';
+            vect = (double(this):double(step):double(to))';
             
             out = DateTime(vect);
         end
@@ -172,8 +172,8 @@ classdef DateTime
             out = norm(this.serialDate,varargin{:});
         end
         
-        function [this k] = sort(this,varargin)
-            [this.serialDate k] = sort(this.serialDate,varargin{:});
+        function [this, k] = sort(this,varargin)
+            [this.serialDate, k] = sort(this.serialDate,varargin{:});
         end
         
         function this = subsref(this,S)
@@ -245,19 +245,19 @@ classdef DateTime
             if nout <=1
                 varargout{1} = datevec(this.serialDate,varargin{:});
             elseif nout ==2
-                [varargout{1} varargout{2}] = datevec(this.serialDate,varargin{:});
+                [varargout{1}, varargout{2}] = datevec(this.serialDate,varargin{:});
                 
             elseif nout ==3
-                [varargout{1} varargout{2} varargout{3}] = datevec(this.serialDate,varargin{:});
+                [varargout{1}, varargout{2}, varargout{3}] = datevec(this.serialDate,varargin{:});
                 
             elseif nout ==4
-                [varargout{1} varargout{2} varargout{3} varargout{4}] = datevec(this.serialDate,varargin{:});
+                [varargout{1}, varargout{2}, varargout{3}, varargout{4}] = datevec(this.serialDate,varargin{:});
                 
             elseif nout ==5
-                [varargout{1} varargout{2} varargout{3} varargout{4} varargout{5} ] = datevec(this.serialDate,varargin{:});
+                [varargout{1}, varargout{2}, varargout{3}, varargout{4}, varargout{5} ] = datevec(this.serialDate,varargin{:});
                 
             elseif nout ==6
-                [varargout{1} varargout{2} varargout{3} varargout{4} varargout{5} varargout{6} ] = datevec(this.serialDate,varargin{:});
+                [varargout{1}, varargout{2}, varargout{3}, varargout{4}, varargout{5}, varargout{6} ] = datevec(this.serialDate,varargin{:});
             else
                 error('Unknown function call');
             end

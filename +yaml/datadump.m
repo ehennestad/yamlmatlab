@@ -13,7 +13,7 @@ indent = repmat(' | ',1,level);
         fprintf([indent,' +-Some data: ']);
         disp(data);
         result = data;
-    end;
+    end
 end
 function result = iter_cell(data, level, addit)
 import yaml.*;
@@ -22,7 +22,7 @@ indent = repmat(' | ',1,level);
     fprintf([indent,'cell {\n']);
     for i = 1:length(data)
         result{i} = recurse(data{i}, level + 1, addit);
-    end;
+    end
     fprintf([indent,'} cell\n']);
 end
 function result = iter_struct(data, level, addit)
@@ -34,6 +34,6 @@ indent = repmat(' | ',1,level);
         fld = char(i);
         fprintf([indent,' +-field ',fld,':\n']);
         result.(fld) = recurse(data.(fld), level + 1, addit);
-    end;
+    end
     fprintf([indent,'} struct\n']);
 end
