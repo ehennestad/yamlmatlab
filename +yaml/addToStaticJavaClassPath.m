@@ -19,9 +19,7 @@ function addToStaticJavaClassPath()
     if ~ismember(jarFilePath, javaclasspath('-static') )
         javaclasspath( jarFilePath ) % Temp add to dynamic path...
     end
-
 end
-
 
 function wasSuccess = addFilepathToStaticJavapath(filepath)
 %addFilepathToStaticJavapath Add filepath to the static java path
@@ -32,14 +30,14 @@ function wasSuccess = addFilepathToStaticJavapath(filepath)
 %
 %   If the filepath is already in the file, this functions returns.
 
-    wasSuccess = false; 
+    wasSuccess = false;
     
     initDir = prefdir;
     staticJavaFilepath = fullfile(initDir, 'javaclasspath.txt');
     
     % Check if filepath already exists on the static javapath. Note: Need
     % to check the file, because the static classpath is only updated on on
-    % matlab startup.    
+    % matlab startup.
     str = fileread(staticJavaFilepath);
     existsInPathDef = contains(str, filepath);
     
@@ -63,5 +61,4 @@ function wasSuccess = addFilepathToStaticJavapath(filepath)
     if status == 0
         wasSuccess = true;
     end
-
 end

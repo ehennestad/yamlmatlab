@@ -49,7 +49,7 @@ if ischar(r)
     elseif isord(r)
         result = scan_ord(r);
     elseif isstruct(r)
-        result = scan_struct(r);                
+        result = scan_struct(r);
     elseif isnumeric(r)
         result = scan_numeric(r);
     elseif islogical(r)
@@ -88,13 +88,13 @@ if isempty(r)
 end
 function result = scan_datetime(r)
 import yaml.*;
-[Y, M, D, H, MN,S] = datevec(double(r));            
+[Y, M, D, H, MN,S] = datevec(double(r));
 	result = java.util.GregorianCalendar(Y, M-1, D, H, MN,S);
 	result.setTimeZone(java.util.TimeZone.getTimeZone('UTC'));
 end
 function result = scan_cell(r)
 import yaml.*;
-if(isrowvector(r))  
+if(isrowvector(r))
         result = scan_cell_row(r);
     elseif(iscolumnvector(r))
         result = scan_cell_column(r);
@@ -140,7 +140,7 @@ result = java.util.ArrayList();
             tmp = {tmp};
         end;
         result.add(scan(tmp));
-    end;    
+    end;
 end
 function result = scan_cell_matrix(r)
 import yaml.*;

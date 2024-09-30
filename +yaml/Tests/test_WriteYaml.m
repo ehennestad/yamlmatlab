@@ -18,13 +18,12 @@ try
     fprintf('.');
     stat.test_WY_ComplexStructure = test_WY_Universal(PTH_IMPORT(), 'import');
     fprintf('.');
-    stat.test_WY_usecase_01 = test_WY_Universal(PTH_PRIMITIVES(), 'usecase_struct_01');    
+    stat.test_WY_usecase_01 = test_WY_Universal(PTH_PRIMITIVES(), 'usecase_struct_01');
     fprintf('.\n');
-catch    
+catch
     stat.ok = 0;
     stat.desc  = 'Program crash';
 end
-
 end
 
 function result = PTH_PRIMITIVES()
@@ -48,10 +47,10 @@ function stat = test_WY_Universal(path, filename)
         ry = ReadYaml('~temporary.yaml');
         if ~isequalwithequalnans(ry, data.testval)
             stat.desc  = 'Wrong values loaded';
-            stat.ok = 0;         
+            stat.ok = 0;
         end;
     catch
         stat.ok = 0;
         stat.desc = 'Crash';
-    end;    
+    end;
 end

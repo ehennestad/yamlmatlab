@@ -1,5 +1,5 @@
 function [vals, timeaxis] = GetYamlVals(yamldata)
-% this function converts data formatted in yaml style (cells containing timestamps and values) 
+% this function converts data formatted in yaml style (cells containing timestamps and values)
 % into matlab user friendly matrices.
 
 % obtain number of samples
@@ -21,8 +21,6 @@ if n
             vals(i,:)   = cell2mat(yamldata{i}(2:end));
         end
     end
-
 end
 
 end % end of function
-

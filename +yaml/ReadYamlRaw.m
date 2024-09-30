@@ -15,7 +15,7 @@ if ~exist('verbose','var')
     if ~ismember(treatasdata,[0,1])
         error('treatasdata parameter must be 0,1 or missing.');
     end;
-    [pth,~,~] = fileparts(mfilename('fullpath'));       
+    [pth,~,~] = fileparts(mfilename('fullpath'));
     try
         import('org.yaml.snakeyaml.*');
         javaObject('org.yaml.snakeyaml.Yaml');
@@ -32,7 +32,7 @@ end
 function result = load_yaml(inputfilename, nosuchfileaction, treatasdata)
 import yaml.*;
 persistent nsfe;
-    if exist('nosuchfileaction','var') %isempty(nsfe) && 
+    if exist('nosuchfileaction','var') %isempty(nsfe) &&
         nsfe = nosuchfileaction;
     end;
     persistent tadf;
@@ -71,7 +71,7 @@ persistent nsfe;
         rethrow(ex);
     end;
     if ~tadf
-        cd(pathstore);    
+        cd(pathstore);
     end;
 end
 function result = scan(r)
@@ -162,7 +162,7 @@ global verbose_readyaml;
 end
 function result = getverblevel()
 import yaml.*;
-global verbose_readyaml; 
+global verbose_readyaml;
     result = verbose_readyaml;
 end
 function info(level, text, value_to_display)

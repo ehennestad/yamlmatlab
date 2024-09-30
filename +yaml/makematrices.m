@@ -26,7 +26,7 @@ if  isvector(data) &&         iscell_all(data) &&         isvector_all(data) && 
         result = tmp;
     elseif isempty(data)
         result = [];
-    else   
+    else
         result = {};
         for i = 1:length(data)
             result{i} = recurse(data{i}, level + 1, addit, makeords);

@@ -15,14 +15,14 @@ function  selftest_yamlmatlab(varargin)
         is included in the program release.
 		
         Author(s):
-		Jiri Cigler, Dept. of Control Engineering, CTU Prague 
+		Jiri Cigler, Dept. of Control Engineering, CTU Prague
 		Jan  Siroky, Energocentrum PLUS s.r.o.
 		
         Implementation and Revisions:
 
         Auth  Date        Description of change
         ----  ---------   -------------------------------------------------
-        jc    25-May-11   First implementation        
+        jc    25-May-11   First implementation
 %}
 %======================================================================
 
@@ -49,7 +49,6 @@ function  selftest_yamlmatlab(varargin)
     end
 
     outStr = strcat(outStr,'</BODY></HTML>');
-
 
     fid = fopen(outFname,'w');
     fprintf(fid,outStr);
@@ -85,11 +84,10 @@ function html = stat2html(stat,name)
     html = [html, '</table>'];
 end
 
-
 function str = getHTMLHeader()
-    str = [ '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"   "http://www.w3.org/TR/html4/strict.dtd">' ... 
-        '<HTML> ' ... 
-        '<HEAD>'... 
-        '<TITLE>::SELFTEST REPORT::</TITLE><STYLE> H2{color:blue} #MainTest{border: 1px blue solid;} h3,h4,h5,h6 {display: inline;}     </STYLE>'... 
+    str = [ '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"   "http://www.w3.org/TR/html4/strict.dtd">' ...
+        '<HTML> ' ...
+        '<HEAD>'...
+        '<TITLE>::SELFTEST REPORT::</TITLE><STYLE> H2{color:blue} #MainTest{border: 1px blue solid;} h3,h4,h5,h6 {display: inline;}     </STYLE>'...
         '</HEAD><BODY style="font-family:Arial, helvetica">'];
 end
